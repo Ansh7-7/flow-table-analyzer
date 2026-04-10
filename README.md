@@ -38,7 +38,39 @@ sudo ovs-ofctl dump-flows s3
 - pingall: 0% packet loss
 - iperf: ~13 Gbits/sec throughput
 - Flow tables: explicit match+action rules with packet/byte counts
+## Test Scenarios & Results
 
+### Scenario 1 - Normal Forwarding & Policy Enforcement
+
+All hosts communicate successfully except the blocked pair (h1 → h6), which is restricted by policy.
+
+**Result:** Partial packet loss due to policy enforcement
+
+![Ping and Blocked Traffic](screenshots/ping_block.png)
+
+---
+
+### Scenario 2 - Flow Table Dump
+
+Explicit OpenFlow rules installed dynamically by the controller across switches.
+
+![Flow Table Dump](screenshots/flow_dump.png)
+
+---
+
+### Scenario 3 - Controller Flow Analysis
+
+Controller logs showing PacketIn events and flow table snapshots.
+
+![Controller Logs](screenshots/controller_logs.png)
+
+---
+
+### Scenario 4 - Traffic Analysis
+
+Controller detects high-traffic flows and ranks top flows.
+
+![Analyzer Output](screenshots/analyzer_output.png)
 ## References
 1. https://mininet.org/overview/
 2. https://noxrepo.github.io/pox-doc/html/
